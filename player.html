@@ -11,8 +11,21 @@
     .navbar .nav-btns a { background: #f5f5f5; padding: 6px 14px; border-radius: 16px; margin-left: 8px; text-decoration: none; color: #000; font-size: 14px; }
     .player-container { width: 100%; height: 50vh; background: #000; display: flex; align-items: center; justify-content: center; }
     iframe { width: 100%; height: 100%; border: none; }
-    .download-btn { display: block; width: 200px; margin: 20px auto; padding: 10px; background: #444; color: #fff; text-align: center; text-decoration: none; border-radius: 6px; font-size: 16px; }
-    .download-btn:hover { background: #333; }
+    .download-btn, .more-videos-btn {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      background: #444;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .download-btn:hover, .more-videos-btn:hover {
+      background: #333;
+    }
     @media (max-width: 768px) {
       .player-container { height: 40vh; }
     }
@@ -30,6 +43,8 @@
     <iframe id="videoFrame" allowfullscreen></iframe>
   </div>
   <a class="download-btn" href="https://goeco.mobi/9WMQezdQ" target="_blank">Download Video</a>
+  <a class="more-videos-btn" href="https://www.profitableratecpm.com/qyvppnqi?key=d80fc662663a8a871a3e06b3aeabcb8d" target="_blank">Video Lainnya</a>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get("video");
