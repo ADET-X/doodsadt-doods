@@ -1,40 +1,21 @@
-async function uploadVideo() {
-  const fileInput = document.getElementById('videoFile');
+function processLink() {
+  const linkInput = document.getElementById('videoLink');
   const status = document.getElementById('status');
-  const file = fileInput.files[0];
-  if (!file) {
-    status.innerText = "Please select a video file.";
+  const link = linkInput.value.trim();
+
+  if (!link) {
+    status.innerText = "Please paste a video link.";
     return;
   }
 
-  status.innerText = "Uploading video to DoodStream...";
-  const formData = new FormData();
-  formData.append("file", file);
-
-  try {
-    const uploadResponse = await fetch("upload.php", {
-      method: "POST",
-      body: formData
-    });
-    const text = await uploadResponse.text();
-    console.log("RAW response:", text);
-    let uploadData;
-    try {
-      uploadData = JSON.parse(text);
-    } catch (e) {
-      status.innerText = "Upload error: response is not valid JSON → " + text;
-      return;
-    }
-
-    if (!uploadData || !uploadData.result || !uploadData.result[0] || !uploadData.result[0].filecode) {
-      status.innerText = "Upload failed: " + JSON.stringify(uploadData);
-      return;
-    }
-
-    const videoId = uploadData.result[0].filecode;
-    status.innerText = "Upload complete! Redirecting to player...";
-    window.location.href = `player.html?video=${videoId}`;
-  } catch (error) {
-    status.innerText = "Upload error: " + error;
+  // Cari filecode dari link DoodStream
+  const match = link.match(/\/(?:e|d)\/([A-Za-z0-9]+)/);
+  if (!match) {
+    status.innerText = "Invalid DoodStream link.";
+    return;
   }
+
+  const videoId = match[1];
+  status.innerText = "Loading player...";
+  window.location.href = `player.html?video=${videoId}`;
 }
