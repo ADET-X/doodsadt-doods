@@ -1,64 +1,96 @@
 <!doctype html>
-
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>JustPaste Clone — Simple Note</title>
+  <title>Simple Note</title>
   <style>
-    :root{--bg:#0f172a;--card:#0b1220;--muted:#94a3b8;--accent:#60a5fa}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,-apple-system,Helvetica,Arial;background:linear-gradient(180deg,#071033 0%,#081127 60%);color:#e6eef8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .app{width:100%;max-width:900px}
-    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-    header h1{font-size:18px;margin:0}
-    .controls{display:flex;gap:8px;align-items:center}
-    input[type=text]{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:inherit;min-width:200px}
-    select{background:transparent;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.06);color:inherit}
-    textarea{width:100%;min-height:420px;background:#021224;border-radius:8px;padding:12px;color:#dbeafe;border:1px solid rgba(255,255,255,0.04);resize:vertical;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;font-size:14px}
-    .row{display:flex;gap:8px;align-items:center}
-    button{background:linear-gradient(90deg,var(--accent),#7dd3fc);border:none;padding:8px 12px;border-radius:8px;color:#012;cursor:pointer;font-weight:600}
-    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
-    .muted{color:var(--muted);font-size:13px}
-    .link-preview{margin-top:10px;background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;word-break:break-all}
-    footer{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
-    .actions{display:flex;gap:8px}
-    @media (max-width:640px){.controls{flex-direction:column;align-items:stretch}input[type=text]{width:100%}}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .app {
+      width: 100%;
+      max-width: 900px;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    input[type=text] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 250px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 600px; /* lebih besar */
+      padding: 12px;
+      font-size: 14px;
+      font-family: monospace;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+    }
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+    button.ghost {
+      background: #f5f5f5;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .muted {
+      font-size: 13px;
+      color: #666;
+    }
+    #preview {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      background: #fafafa;
+      word-break: break-all;
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <main class="app card">
-    <header>
-      <h1>JustPaste-style Note — <span class="muted">Paste cepat & bagikan</span></h1>
-      <div class="controls">
-        <input id="title" placeholder="Judul (opsional)" type="text" />
-        <select id="viewMode" title="View mode">
-          <option value="render">Render</option>
-          <option value="raw">Raw</option>
-        </select>
-      </div>
-    </header><textarea id="editor" placeholder="Tulis catatanmu di sini... (tekan Ctrl/Cmd+S untuk generate link)"></textarea>
+  <main class="app">
+    <h1>Simple Note — <span class="muted">Paste cepat & bagikan</span></h1>
 
-<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-  <div class="row">
-    <button id="saveBtn">Generate Link</button>
-    <button class="ghost" id="copyBtn">Copy Link</button>
-    <button class="ghost" id="downloadBtn">Download .txt</button>
-    <button class="ghost" id="clearBtn">Bersihkan</button>
-  </div>
-  <div style="margin-left:auto" class="muted">Ukuran: <span id="size">0</span> chars</div>
-</div>
+    <input id="title" placeholder="Judul (opsional)" type="text" />
 
-<div id="preview" class="link-preview muted" style="display:none"></div>
+    <textarea id="editor" placeholder="Tulis catatanmu di sini..."></textarea>
 
-<footer>
-  <div class="muted">Local & URL-based. Tidak ada server — link menyimpan teks ke URL (hash).</div>
-  <div class="muted">Made for you • simple • privacy-friendly</div>
-</footer>
+    <div class="row">
+      <button id="saveBtn">Generate Link</button>
+      <button class="ghost" id="copyBtn">Copy Link</button>
+      <button class="ghost" id="downloadBtn">Download .txt</button>
+      <button class="ghost" id="clearBtn">Bersihkan</button>
+      <div class="muted" style="margin-left:auto">Ukuran: <span id="size">0</span> chars</div>
+    </div>
 
-  </main>  <script>
-    // Small JustPaste-like single-file client. It encodes content into URL hash so you can share without server.
+    <div id="preview"></div>
+  </main>
+
+  <script>
     const editor = document.getElementById('editor')
     const titleInput = document.getElementById('title')
     const saveBtn = document.getElementById('saveBtn')
@@ -67,76 +99,76 @@
     const clearBtn = document.getElementById('clearBtn')
     const preview = document.getElementById('preview')
     const sizeDisplay = document.getElementById('size')
-    const viewMode = document.getElementById('viewMode')
 
     function setSize(){ sizeDisplay.textContent = editor.value.length }
-    editor.addEventListener('input', ()=>{ setSize(); preview.style.display='none' })
-    titleInput.addEventListener('input', ()=> preview.style.display='none')
+    editor.addEventListener('input', setSize)
 
-    // encode / decode helpers (URL-safe base64)
     function encodeContent(str){ try{ return btoa(unescape(encodeURIComponent(str))) }catch(e){ return '' }}
     function decodeContent(b64){ try{ return decodeURIComponent(escape(atob(b64))) }catch(e){ return '' }}
 
-    // build permalink: use location.origin + pathname + #data
-    function buildLink(){ const title = titleInput.value.trim(); const content = editor.value; const meta = JSON.stringify({t: title||null,v:viewMode.value}); const payload = encodeContent(meta+'\n\n'+content); if(!payload) return null; return location.origin + location.pathname + '#p=' + payload }
+    function buildLink(){
+      const title = titleInput.value.trim()
+      const content = editor.value
+      const meta = JSON.stringify({t: title||null})
+      const payload = encodeContent(meta+'\\n\\n'+content)
+      if(!payload) return null
+      return location.origin + location.pathname + '#p=' + payload
+    }
 
     saveBtn.addEventListener('click', ()=>{
-      const link = buildLink(); if(!link){ alert('Tidak bisa encode - mungkin teks terlalu besar. Coba download.'); return }
+      const link = buildLink()
+      if(!link){ alert('Tidak bisa encode'); return }
       preview.style.display='block'
-      preview.innerHTML = '<strong>Shareable link:</strong><br>' + link
+      preview.innerHTML = '<strong>Link:</strong><br>' + link
       navigator.clipboard?.writeText(link).catch(()=>{})
     })
 
     copyBtn.addEventListener('click', async ()=>{
-      const link = buildLink(); if(!link){ alert('Belum ada link (teks kosong atau terlalu besar)'); return }
-      try{ await navigator.clipboard.writeText(link); copyBtn.textContent='Copied!'; setTimeout(()=>copyBtn.textContent='Copy Link',1200)}catch(e){ prompt('Copy link manual:', link) }
+      const link = buildLink()
+      if(!link){ alert('Belum ada link'); return }
+      try{
+        await navigator.clipboard.writeText(link)
+        copyBtn.textContent='Copied!'
+        setTimeout(()=>copyBtn.textContent='Copy Link',1200)
+      }catch(e){
+        prompt('Copy link manual:', link)
+      }
     })
 
     downloadBtn.addEventListener('click', ()=>{
-      const blob = new Blob([editor.value], {type:'text/plain'});
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (titleInput.value.trim()||'paste') + '.txt'; a.click(); URL.revokeObjectURL(a.href);
+      const blob = new Blob([editor.value], {type:'text/plain'})
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(blob)
+      a.download = (titleInput.value.trim()||'paste') + '.txt'
+      a.click()
+      URL.revokeObjectURL(a.href)
     })
 
-    clearBtn.addEventListener('click', ()=>{ if(!confirm('Hapus semua teks?')) return; editor.value=''; titleInput.value=''; setSize(); preview.style.display='none' })
-
-    // support Ctrl/Cmd+S to generate link
-    window.addEventListener('keydown', (e)=>{
-      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()=='s'){ e.preventDefault(); saveBtn.click(); }
+    clearBtn.addEventListener('click', ()=>{
+      if(!confirm('Hapus semua teks?')) return
+      editor.value=''
+      titleInput.value=''
+      setSize()
+      preview.style.display='none'
     })
 
-    // on load: if URL has #p=..., decode and populate
-    function loadFromHash(){ const hash = location.hash||''; if(!hash.includes('#p=')) return false; const payload = hash.split('#p=')[1]; if(!payload) return false; const decoded = decodeContent(payload); if(!decoded) return false; // meta + blank line + content
-      const parts = decoded.split('\n\n'); const meta = parts.shift(); const content = parts.join('\n\n'); try{ const m = JSON.parse(meta); if(m?.t) titleInput.value = m.t; if(m?.v) viewMode.value = m.v }catch(e){}
-      editor.value = content; setSize(); // if view mode is render, try minimal render: convert markdown-like headers -> h1, bold -> strong (very tiny)
-      if(viewMode.value === 'render') renderSimple()
-      return true
+    function loadFromHash(){
+      const hash = location.hash||''
+      if(!hash.includes('#p=')) return
+      const payload = hash.split('#p=')[1]
+      if(!payload) return
+      const decoded = decodeContent(payload)
+      if(!decoded) return
+      const parts = decoded.split('\\n\\n')
+      const meta = parts.shift()
+      const content = parts.join('\\n\\n')
+      try{ const m = JSON.parse(meta); if(m?.t) titleInput.value = m.t }catch(e){}
+      editor.value = content
+      setSize()
     }
 
-    function renderSimple(){ // very small markdown-ish renderer (not full md)
-      const lines = editor.value.split('\n'); let out='';
-      for(const line of lines){ if(line.startsWith('# ')) out += '<h1>'+escapeHTML(line.slice(2))+'</h1>'; else if(line.startsWith('## ')) out += '<h2>'+escapeHTML(line.slice(3))+'</h2>'; else out += '<p>'+escapeHTML(line)+'</p>' }
-      preview.style.display='block'; preview.innerHTML = out
-    }
-
-    function escapeHTML(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;') }
-
-    // when user selects 'render' show preview
-    viewMode.addEventListener('change', ()=>{ if(viewMode.value==='render') renderSimple(); else preview.style.display='none' })
-
-    // initial size
-    setSize();
-    // try load from hash
-    loadFromHash();
-
-    // small UX: update preview live when in render mode
-    let typingTimer = null
-    editor.addEventListener('input', ()=>{
-      if(viewMode.value!=='render') return
-      clearTimeout(typingTimer)
-      typingTimer = setTimeout(()=>renderSimple(), 350)
-    })
-
-    // expose simple share function for console/debug
-    window.justpaste = {buildLink, encodeContent, decodeContent}
-  </script></body>
+    setSize()
+    loadFromHash()
+  </script>
+</body>
 </html>
