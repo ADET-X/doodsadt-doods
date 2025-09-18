@@ -1,109 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>doodsadt - Paste Link</title>
-  <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: #000; }
-    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #ddd; }
-    .logo { font-weight: bold; font-size: 24px; }
-    .container { text-align: center; padding: 60px 20px; }
-    input[type="text"] { padding: 10px; font-size: 16px; width: 80%; max-width: 400px; margin-bottom: 20px; }
-    button { padding: 10px 20px; font-size: 16px; background-color: #444; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
-    #status { margin-top: 20px; color: #666; }
+<!doctype html>
 
-    /* Tambahan untuk footer dan modal */
-    .footer {
-      text-align: center;
-      padding: 20px 0;
-      font-size: 14px;
-      color: #999;
-    }
-    .footer a {
-      margin: 0 10px;
-      color: #0000EE;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      padding-top: 50px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.7);
-    }
-    .modal-content {
-      margin: auto;
-      display: block;
-      max-width: 90%;
-    }
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JustPaste Clone — Simple Note</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--muted:#94a3b8;--accent:#60a5fa}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,-apple-system,Helvetica,Arial;background:linear-gradient(180deg,#071033 0%,#081127 60%);color:#e6eef8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .app{width:100%;max-width:900px}
+    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    header h1{font-size:18px;margin:0}
+    .controls{display:flex;gap:8px;align-items:center}
+    input[type=text]{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:inherit;min-width:200px}
+    select{background:transparent;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.06);color:inherit}
+    textarea{width:100%;min-height:420px;background:#021224;border-radius:8px;padding:12px;color:#dbeafe;border:1px solid rgba(255,255,255,0.04);resize:vertical;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;font-size:14px}
+    .row{display:flex;gap:8px;align-items:center}
+    button{background:linear-gradient(90deg,var(--accent),#7dd3fc);border:none;padding:8px 12px;border-radius:8px;color:#012;cursor:pointer;font-weight:600}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+    .muted{color:var(--muted);font-size:13px}
+    .link-preview{margin-top:10px;background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;word-break:break-all}
+    footer{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+    .actions{display:flex;gap:8px}
+    @media (max-width:640px){.controls{flex-direction:column;align-items:stretch}input[type=text]{width:100%}}
+  </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">doodsadt</div>
-  </div>
-  <div class="container">
-    <h2>Paste Video Link</h2>
-    <input type="text" id="videoLink" placeholder="Paste your DoodStream link here" />
-    <br/>
-    <button onclick="processLink()">Play</button>
-    <p id="status"></p>
-  </div>
+  <main class="app card">
+    <header>
+      <h1>JustPaste-style Note — <span class="muted">Paste cepat & bagikan</span></h1>
+      <div class="controls">
+        <input id="title" placeholder="Judul (opsional)" type="text" />
+        <select id="viewMode" title="View mode">
+          <option value="render">Render</option>
+          <option value="raw">Raw</option>
+        </select>
+      </div>
+    </header><textarea id="editor" placeholder="Tulis catatanmu di sini... (tekan Ctrl/Cmd+S untuk generate link)"></textarea>
 
-  <!-- Footer -->
-  <div class="footer">
-    <p>Copyright © 2025 videy.co</p>
-    <a onclick="openModal('tosModal')">Terms of Service</a>
-    <a onclick="openModal('abuseModal')">Report Abuse</a>
-  </div>
+<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+  <div class="row">
+    <button id="saveBtn">Generate Link</button>
+    <button class="ghost" id="copyBtn">Copy Link</button>
+    <button class="ghost" id="downloadBtn">Download .txt</button>
+    <button class="ghost" id="clearBtn">Bersihkan</button>
+  </div>
+  <div style="margin-left:auto" class="muted">Ukuran: <span id="size">0</span> chars</div>
+</div>
 
-  <!-- Terms of Service Modal -->
-  <div id="tosModal" class="modal">
-    <span class="close" onclick="closeModal('tosModal')">&times;</span>
-    <img class="modal-content" src="/mnt/data/1000042143.jpg" alt="Terms of Service">
-  </div>
+<div id="preview" class="link-preview muted" style="display:none"></div>
 
-  <!-- Report Abuse Modal -->
-  <div id="abuseModal" class="modal">
-    <span class="close" onclick="closeModal('abuseModal')">&times;</span>
-    <img class="modal-content" src="/mnt/data/1000042145.jpg" alt="Report Abuse">
-  </div>
+<footer>
+  <div class="muted">Local & URL-based. Tidak ada server — link menyimpan teks ke URL (hash).</div>
+  <div class="muted">Made for you • simple • privacy-friendly</div>
+</footer>
 
-  <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = "block";
-    }
+  </main>  <script>
+    // Small JustPaste-like single-file client. It encodes content into URL hash so you can share without server.
+    const editor = document.getElementById('editor')
+    const titleInput = document.getElementById('title')
+    const saveBtn = document.getElementById('saveBtn')
+    const copyBtn = document.getElementById('copyBtn')
+    const downloadBtn = document.getElementById('downloadBtn')
+    const clearBtn = document.getElementById('clearBtn')
+    const preview = document.getElementById('preview')
+    const sizeDisplay = document.getElementById('size')
+    const viewMode = document.getElementById('viewMode')
 
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
-    }
+    function setSize(){ sizeDisplay.textContent = editor.value.length }
+    editor.addEventListener('input', ()=>{ setSize(); preview.style.display='none' })
+    titleInput.addEventListener('input', ()=> preview.style.display='none')
 
-    window.onclick = function(event) {
-      const modals = document.querySelectorAll('.modal');
-      modals.forEach(modal => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-    }
-  </script>
+    // encode / decode helpers (URL-safe base64)
+    function encodeContent(str){ try{ return btoa(unescape(encodeURIComponent(str))) }catch(e){ return '' }}
+    function decodeContent(b64){ try{ return decodeURIComponent(escape(atob(b64))) }catch(e){ return '' }}
 
-  <script src="upload.js"></script>
-</body>
+    // build permalink: use location.origin + pathname + #data
+    function buildLink(){ const title = titleInput.value.trim(); const content = editor.value; const meta = JSON.stringify({t: title||null,v:viewMode.value}); const payload = encodeContent(meta+'\n\n'+content); if(!payload) return null; return location.origin + location.pathname + '#p=' + payload }
+
+    saveBtn.addEventListener('click', ()=>{
+      const link = buildLink(); if(!link){ alert('Tidak bisa encode - mungkin teks terlalu besar. Coba download.'); return }
+      preview.style.display='block'
+      preview.innerHTML = '<strong>Shareable link:</strong><br>' + link
+      navigator.clipboard?.writeText(link).catch(()=>{})
+    })
+
+    copyBtn.addEventListener('click', async ()=>{
+      const link = buildLink(); if(!link){ alert('Belum ada link (teks kosong atau terlalu besar)'); return }
+      try{ await navigator.clipboard.writeText(link); copyBtn.textContent='Copied!'; setTimeout(()=>copyBtn.textContent='Copy Link',1200)}catch(e){ prompt('Copy link manual:', link) }
+    })
+
+    downloadBtn.addEventListener('click', ()=>{
+      const blob = new Blob([editor.value], {type:'text/plain'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (titleInput.value.trim()||'paste') + '.txt'; a.click(); URL.revokeObjectURL(a.href);
+    })
+
+    clearBtn.addEventListener('click', ()=>{ if(!confirm('Hapus semua teks?')) return; editor.value=''; titleInput.value=''; setSize(); preview.style.display='none' })
+
+    // support Ctrl/Cmd+S to generate link
+    window.addEventListener('keydown', (e)=>{
+      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()=='s'){ e.preventDefault(); saveBtn.click(); }
+    })
+
+    // on load: if URL has #p=..., decode and populate
+    function loadFromHash(){ const hash = location.hash||''; if(!hash.includes('#p=')) return false; const payload = hash.split('#p=')[1]; if(!payload) return false; const decoded = decodeContent(payload); if(!decoded) return false; // meta + blank line + content
+      const parts = decoded.split('\n\n'); const meta = parts.shift(); const content = parts.join('\n\n'); try{ const m = JSON.parse(meta); if(m?.t) titleInput.value = m.t; if(m?.v) viewMode.value = m.v }catch(e){}
+      editor.value = content; setSize(); // if view mode is render, try minimal render: convert markdown-like headers -> h1, bold -> strong (very tiny)
+      if(viewMode.value === 'render') renderSimple()
+      return true
+    }
+
+    function renderSimple(){ // very small markdown-ish renderer (not full md)
+      const lines = editor.value.split('\n'); let out='';
+      for(const line of lines){ if(line.startsWith('# ')) out += '<h1>'+escapeHTML(line.slice(2))+'</h1>'; else if(line.startsWith('## ')) out += '<h2>'+escapeHTML(line.slice(3))+'</h2>'; else out += '<p>'+escapeHTML(line)+'</p>' }
+      preview.style.display='block'; preview.innerHTML = out
+    }
+
+    function escapeHTML(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;') }
+
+    // when user selects 'render' show preview
+    viewMode.addEventListener('change', ()=>{ if(viewMode.value==='render') renderSimple(); else preview.style.display='none' })
+
+    // initial size
+    setSize();
+    // try load from hash
+    loadFromHash();
+
+    // small UX: update preview live when in render mode
+    let typingTimer = null
+    editor.addEventListener('input', ()=>{
+      if(viewMode.value!=='render') return
+      clearTimeout(typingTimer)
+      typingTimer = setTimeout(()=>renderSimple(), 350)
+    })
+
+    // expose simple share function for console/debug
+    window.justpaste = {buildLink, encodeContent, decodeContent}
+  </script></body>
 </html>
