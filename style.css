@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.folder-grid {
+    /* KUNCI: Menggunakan CSS Grid */
+    display: grid;
+    /* Membuat 5 kolom dengan lebar yang sama (1fr = fraction) */
+    grid-template-columns: repeat(5, 1fr);
+    /* Memberikan jarak antar folder */
+    gap: 15px; 
+    /* Membuat grid berada di tengah halaman */
+    max-width: 1000px; /* Lebar maksimal area folder */
+    margin: 0 auto;
+}
+
+/* Styling untuk setiap "Folder" */
+.folder-item {
+    background-color: #ffd700; /* Warna kuning */
+    border: 1px solid #ccaa00;
+    border-radius: 5px; /* Sudut melengkung */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-decoration: none; /* Menghilangkan garis bawah link */
+    color: #333;
+    font-weight: bold;
+    padding: 20px 10px; /* Ruang di dalam folder */
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    
+    /* Memastikan link mengisi seluruh area item */
+    display: block; 
+}
+
+.folder-item:hover {
+    transform: scale(1.05); /* Efek sedikit membesar saat di-hover */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffe033; /* Warna sedikit lebih terang saat di-hover */
+    color: #000;
+}
