@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu 25 Folder Gaya Horor (Single File)</title>
+    <title>Menu 25 Ruangan Rapi</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,12 @@
     <style>
         /* CSS Reset dan Global Styling */
         body {
-            font-family: 'Creepster', cursive; /* Gunakan font Creepster */
+            font-family: 'Creepster', cursive;
             margin: 0;
-            background-color: #000; /* Latar belakang hitam */
-            color: #0f0; /* Warna teks utama hijau */
-            display: flex; /* Untuk menengahkan konten */
-            justify-content: center;
+            background-color: #000;
+            color: #0f0;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
@@ -29,25 +29,26 @@
             color: #0f0;
             text-align: center;
             margin-bottom: 40px;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0; /* Efek neon */
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            white-space: nowrap;
         }
 
         .container-menu {
-            text-align: center;
             width: 100%;
             max-width: 1200px;
+            padding-top: 20px;
         }
 
-        /* Kunci: CSS Grid untuk 5 Kolom */
+        /* Kunci: CSS Grid untuk 5 Kolom yang Rapi */
         .folder-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr); /* 5 kolom dengan lebar sama */
-            gap: 20px; /* Jarak antar tombol */
+            gap: 10px; 
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
             background-color: #1a1a1a;
             border: 2px solid #0a0;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Efek glow */
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
             border-radius: 10px;
         }
 
@@ -60,8 +61,132 @@
             text-align: center;
             text-decoration: none;
             color: #0f0;
-            font-size: 1.5em;
-            padding: 15px 10px;
+            font-size: 1.2em; 
+            padding: 10px 5px; 
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            display: block; 
+            white-space: nowrap; 
+        }
+
+        /* Teks di dalam tombol */
+        .folder-item span {
+            display: block;
+            line-height: 1.1;
+        }
+
+        .folder-item:hover {
+            transform: scale(1.05);
+            background-color: #333;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7), inset 0 0 8px rgba(0, 255, 0, 0.4);
+            color: #0ff;
+            text-shadow: 0 0 5px #0ff;
+        }
+
+        .folder-item:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.4), inset 0 0 3px rgba(0, 255, 0, 0.3);
+        }
+
+        /* Media Query: Mengubah menjadi 4 kolom di layar sangat kecil (Ponsel) agar tidak 'bug' */
+        @media (max-width: 500px) {
+            .folder-grid {
+                grid-template-columns: repeat(4, 1fr); 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-menu">
+        <h1>Pilih Labirin Anda</h1>
+        <div class="folder-grid">
+            
+            <a href="https://videy.team/f/yj1cisoety0" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 01
+            </a>
+            <a href="https://videy.team/f/ecnuo87qyj9" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 02
+            </a>
+            <a href="https://videy.team/f/cokqvr0ygxu" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 03
+            </a>
+            <a href="https://videy.team/f/ykxi17efs1m" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 04
+            </a>
+            <a href="https://videy.team/f/5zstkd562op" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 05
+            </a>
+
+            <a href="https://videy.team/f/8e76x4vnn7c" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 06
+            </a>
+            <a href="https://videy.team/f/83jcn6pvikk" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 07
+            </a>
+            <a href="https://videy.team/f/1u1kdn1tur1" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 08
+            </a>
+            <a href="https://videy.team/f/5n3hl7woxv1" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 09
+            </a>
+            <a href="https://videy.team/f/6hzw2z7hl78" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 10
+            </a>
+
+            <a href="https://videy.team/f/h6d8tiwp1dv" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 11
+            </a>
+            <a href="https://videy.team/f/tdx5tio4szf" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 12
+            </a>
+            <a href="https://videy.team/f/6niklrfjfp9" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 13
+            </a>
+            <a href="https://videy.team/f/kkcpm88r6nk" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 14
+            </a>
+            <a href="https://videy.team/f/smvrhhj6r5a" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 15
+            </a>
+
+            <a href="https://videy.team/f/on8o2m5joyv" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 16
+            </a>
+            <a href="https://videy.team/f/o9wyh1jxgo0" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 17
+            </a>
+            <a href="https://videy.team/f/xjvum6mhcmg" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 18
+            </a>
+            <a href="https://videy.team/f/c16a46li04o" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 19
+            </a>
+            <a href="https://videy.team/f/2k3cze6ymz1" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 20
+            </a>
+            
+            <a href="https://videy.team/f/7bwvb403cji" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 21
+            </a>
+            <a href="https://videy.team/f/f0fvcvjrr14" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 22
+            </a>
+            <a href="https://videy.team/f/ye9ueoj26zy" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 23
+            </a>
+            <a href="https://videy.team/f/hd22z42z6on" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 24
+            </a>
+            <a href="https://videy.team/f/13djgms6tp0" target="_blank" class="folder-item">
+                💀 <span>RUANG</span> 25
+            </a>
+            
+        </div>
+    </div>
+
+</body>
+</html>
             transition: all 0.2s ease-in-out;
             cursor: pointer;
             display: block; /* Penting: Membuat link mengisi seluruh area tombol */
