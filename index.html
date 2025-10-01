@@ -3,12 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu 25 Folder Horor</title>
+    <title>Menu 25 Folder Gaya Horor (Single File)</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* CSS Reset dan Global Styling */
+        body {
+            font-family: 'Creepster', cursive; /* Gunakan font Creepster */
+            margin: 0;
+            background-color: #000; /* Latar belakang hitam */
+            color: #0f0; /* Warna teks utama hijau */
+            display: flex; /* Untuk menengahkan konten */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #0f0;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0; /* Efek neon */
+        }
+
+        .container-menu {
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Kunci: CSS Grid untuk 5 Kolom */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 kolom dengan lebar sama */
+            gap: 20px; /* Jarak antar tombol */
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border: 2px solid #0a0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Efek glow */
+            border-radius: 10px;
+        }
+
+        /* Styling Tombol/Folder */
+        .folder-item {
+            background-color: #222;
+            border: 2px solid #0f0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3), inset 0 0 5px rgba(0, 255, 0, 0.2);
+            text-align: center;
+            text-decoration: none;
+            color: #0f0;
+            font-size: 1.5em;
+            padding: 15px 10px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            display: block; /* Penting: Membuat link mengisi seluruh area tombol */
+        }
+
+        .folder-item:hover {
+            transform: scale(1.08);
+            background-color: #333;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7), inset 0 0 8px rgba(0, 255, 0, 0.4);
+            color: #0ff;
+            text-shadow: 0 0 5px #0ff;
+        }
+
+        .folder-item:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.4), inset 0 0 3px rgba(0, 255, 0, 0.3);
+        }
+    </style>
 </head>
 <body>
 
@@ -62,6 +133,45 @@
             </a>
             <a href="link-folder-15.html" class="folder-item">
                 💀 Ruang 15
+            </a>
+
+            <a href="link-folder-16.html" class="folder-item">
+                💀 Ruang 16
+            </a>
+            <a href="link-folder-17.html" class="folder-item">
+                💀 Ruang 17
+            </a>
+            <a href="link-folder-18.html" class="folder-item">
+                💀 Ruang 18
+            </a>
+            <a href="link-folder-19.html" class="folder-item">
+                💀 Ruang 19
+            </a>
+            <a href="link-folder-20.html" class="folder-item">
+                💀 Ruang 20
+            </a>
+            
+            <a href="link-folder-21.html" class="folder-item">
+                💀 Ruang 21
+            </a>
+            <a href="link-folder-22.html" class="folder-item">
+                💀 Ruang 22
+            </a>
+            <a href="link-folder-23.html" class="folder-item">
+                💀 Ruang 23
+            </a>
+            <a href="link-folder-24.html" class="folder-item">
+                💀 Ruang 24
+            </a>
+            <a href="link-folder-25.html" class="folder-item">
+                💀 Ruang 25
+            </a>
+            
+        </div>
+    </div>
+
+</body>
+</html>
             </a>
 
             <a href="link-folder-16.html" class="folder-item">
