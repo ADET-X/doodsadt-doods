@@ -1,174 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Simple Note</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #222;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-    .app {
-      width: 100%;
-      max-width: 900px;
-    }
-    h1 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    input[type=text] {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      width: 250px;
-    }
-    textarea {
-      width: 100%;
-      min-height: 600px; /* lebih besar */
-      padding: 12px;
-      font-size: 14px;
-      font-family: monospace;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      resize: vertical;
-    }
-    button {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 6px;
-      background: #2563eb;
-      color: #fff;
-      cursor: pointer;
-    }
-    button.ghost {
-      background: #f5f5f5;
-      color: #333;
-      border: 1px solid #ccc;
-    }
-    .row {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .muted {
-      font-size: 13px;
-      color: #666;
-    }
-    #preview {
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid #eee;
-      border-radius: 6px;
-      background: #fafafa;
-      word-break: break-all;
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu 25 Folder Grid</title>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-  <main class="app">
-    <h1>Simple Note — <span class="muted">Paste cepat & bagikan</span></h1>
 
-    <input id="title" placeholder="Judul (opsional)" type="text" />
+    <div class="container-menu">
+        <div class="folder-grid">
+            
+            <a href="link-folder-1.html" class="folder-item">
+                📁 Folder 01
+            </a>
+            <a href="link-folder-2.html" class="folder-item">
+                📁 Folder 02
+            </a>
+            <a href="link-folder-3.html" class="folder-item">
+                📁 Folder 03
+            </a>
+            <a href="link-folder-4.html" class="folder-item">
+                📁 Folder 04
+            </a>
+            <a href="link-folder-5.html" class="folder-item">
+                📁 Folder 05
+            </a>
 
-    <textarea id="editor" placeholder="Tulis catatanmu di sini..."></textarea>
+            <a href="link-folder-6.html" class="folder-item">
+                📁 Folder 06
+            </a>
+            <a href="link-folder-7.html" class="folder-item">
+                📁 Folder 07
+            </a>
+            <a href="link-folder-8.html" class="folder-item">
+                📁 Folder 08
+            </a>
+            <a href="link-folder-9.html" class="folder-item">
+                📁 Folder 09
+            </a>
+            <a href="link-folder-10.html" class="folder-item">
+                📁 Folder 10
+            </a>
 
-    <div class="row">
-      <button id="saveBtn">Generate Link</button>
-      <button class="ghost" id="copyBtn">Copy Link</button>
-      <button class="ghost" id="downloadBtn">Download .txt</button>
-      <button class="ghost" id="clearBtn">Bersihkan</button>
-      <div class="muted" style="margin-left:auto">Ukuran: <span id="size">0</span> chars</div>
+            <a href="link-folder-11.html" class="folder-item">
+                📁 Folder 11
+            </a>
+            <a href="link-folder-12.html" class="folder-item">
+                📁 Folder 12
+            </a>
+            <a href="link-folder-13.html" class="folder-item">
+                📁 Folder 13
+            </a>
+            <a href="link-folder-14.html" class="folder-item">
+                📁 Folder 14
+            </a>
+            <a href="link-folder-15.html" class="folder-item">
+                📁 Folder 15
+            </a>
+
+            <a href="link-folder-16.html" class="folder-item">
+                📁 Folder 16
+            </a>
+            <a href="link-folder-17.html" class="folder-item">
+                📁 Folder 17
+            </a>
+            <a href="link-folder-18.html" class="folder-item">
+                📁 Folder 18
+            </a>
+            <a href="link-folder-19.html" class="folder-item">
+                📁 Folder 19
+            </a>
+            <a href="link-folder-20.html" class="folder-item">
+                📁 Folder 20
+            </a>
+            
+            <a href="link-folder-21.html" class="folder-item">
+                📁 Folder 21
+            </a>
+            <a href="link-folder-22.html" class="folder-item">
+                📁 Folder 22
+            </a>
+            <a href="link-folder-23.html" class="folder-item">
+                📁 Folder 23
+            </a>
+            <a href="link-folder-24.html" class="folder-item">
+                📁 Folder 24
+            </a>
+            <a href="link-folder-25.html" class="folder-item">
+                📁 Folder 25
+            </a>
+            
+        </div>
     </div>
 
-    <div id="preview"></div>
-  </main>
-
-  <script>
-    const editor = document.getElementById('editor')
-    const titleInput = document.getElementById('title')
-    const saveBtn = document.getElementById('saveBtn')
-    const copyBtn = document.getElementById('copyBtn')
-    const downloadBtn = document.getElementById('downloadBtn')
-    const clearBtn = document.getElementById('clearBtn')
-    const preview = document.getElementById('preview')
-    const sizeDisplay = document.getElementById('size')
-
-    function setSize(){ sizeDisplay.textContent = editor.value.length }
-    editor.addEventListener('input', setSize)
-
-    function encodeContent(str){ try{ return btoa(unescape(encodeURIComponent(str))) }catch(e){ return '' }}
-    function decodeContent(b64){ try{ return decodeURIComponent(escape(atob(b64))) }catch(e){ return '' }}
-
-    function buildLink(){
-      const title = titleInput.value.trim()
-      const content = editor.value
-      const meta = JSON.stringify({t: title||null})
-      const payload = encodeContent(meta+'\\n\\n'+content)
-      if(!payload) return null
-      return location.origin + location.pathname + '#p=' + payload
-    }
-
-    saveBtn.addEventListener('click', ()=>{
-      const link = buildLink()
-      if(!link){ alert('Tidak bisa encode'); return }
-      preview.style.display='block'
-      preview.innerHTML = '<strong>Link:</strong><br>' + link
-      navigator.clipboard?.writeText(link).catch(()=>{})
-    })
-
-    copyBtn.addEventListener('click', async ()=>{
-      const link = buildLink()
-      if(!link){ alert('Belum ada link'); return }
-      try{
-        await navigator.clipboard.writeText(link)
-        copyBtn.textContent='Copied!'
-        setTimeout(()=>copyBtn.textContent='Copy Link',1200)
-      }catch(e){
-        prompt('Copy link manual:', link)
-      }
-    })
-
-    downloadBtn.addEventListener('click', ()=>{
-      const blob = new Blob([editor.value], {type:'text/plain'})
-      const a = document.createElement('a')
-      a.href = URL.createObjectURL(blob)
-      a.download = (titleInput.value.trim()||'paste') + '.txt'
-      a.click()
-      URL.revokeObjectURL(a.href)
-    })
-
-    clearBtn.addEventListener('click', ()=>{
-      if(!confirm('Hapus semua teks?')) return
-      editor.value=''
-      titleInput.value=''
-      setSize()
-      preview.style.display='none'
-    })
-
-    function loadFromHash(){
-      const hash = location.hash||''
-      if(!hash.includes('#p=')) return
-      const payload = hash.split('#p=')[1]
-      if(!payload) return
-      const decoded = decodeContent(payload)
-      if(!decoded) return
-      const parts = decoded.split('\\n\\n')
-      const meta = parts.shift()
-      const content = parts.join('\\n\\n')
-      try{ const m = JSON.parse(meta); if(m?.t) titleInput.value = m.t }catch(e){}
-      editor.value = content
-      setSize()
-    }
-
-    setSize()
-    loadFromHash()
-  </script>
 </body>
 </html>
