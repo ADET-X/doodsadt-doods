@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Redirect...</title>
+<meta charset="UTF-8" />
+<title>Redirecting...</title>
 <script>
-// Ambil path URL, contoh: /t/abcd123
-const path = window.location.pathname;
+    const path = window.location.pathname; // contoh: /t/abcd
 
-// Cek apakah path diawali /t/
-if (path.startsWith("/t/")) {
-  // Ambil abcd123
-  const code = path.substring(3);
+    // Jika /t/xxx → redirect ke Tokopedia
+    if (path.startsWith("/t/")) {
+        const code = path.replace("/t/", ""); 
+        window.location.href = "https://vt.tokopedia.com/t/" + code;
+    }
 
-  // Redirect ke vt.tokopedia.com
-  window.location.href = "https://vt.tokopedia.com/t/" + code;
-} else {
-  document.write("404 Not Found");
-}
+    // Jika /f/xxx → redirect ke plaver.de
+    else if (path.startsWith("/f/")) {
+        const code = path.replace("/f/", ""); 
+        window.location.href = "https://plaver.de/f/" + code;
+    }
+
+    // Jika tidak cocok → ke homepage atau bebas
+    else {
+        document.body.innerHTML = "<h1>404 Not Found</h1>";
+    }
 </script>
 </head>
 <body>
+Redirecting...
 </body>
 </html>
