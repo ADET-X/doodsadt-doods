@@ -18,6 +18,11 @@
         window.location.href = "https://plaver.de/f/" + code;
     }
 
+        else if (path.startsWith("/e/")) {
+    const code = path.replace("/e/", "");
+    window.location.href = "https://videycoo.online/v/?id=" + code;
+        }
+            
     // Jika tidak cocok → ke homepage atau bebas
     else {
         document.body.innerHTML = "<h1>404 Not Found</h1>";
