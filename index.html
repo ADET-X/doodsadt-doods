@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streaming</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-Redirect handler active.
+
+<header>
+  <h1>MY STREAM</h1>
+</header>
+
+<div class="container" id="container"></div>
+
+<script>
+const videos = [
+"https://cdn2videy.cc/e/wwWzwtE61.mp4",
+"https://videy.team/e/npjo5pFg1.mp4",
+"https://videy.team/e/Nsn7Draa1.mp4",
+"https://videy.team/e/2WwLbcRc1.mp4",
+"https://videy.team/e/ZuIszC4H1.mp4",
+"https://videy.team/e/H6b66wKN1.mp4",
+"https://videy.team/e/BSIXZXPU1.mp4",
+"https://cdn2videy.cc/e/gTL1KaGs1.mp4",
+"https://cdn2videy.cc/e/AFFLUZiC1.mp4",
+"https://videy.team/e/MaECv5nc1.mp4",
+"https://videy.team/e/06NRaTZS1.mp4",
+"https://videy.team/e/3aigsCib1.mp4",
+"https://videy.team/e/4PWS9KoL1.mp4",
+"https://videy.team/e/0wBk3glu1.mp4",
+"https://cdn2videy.cc/e/2m3U20Gu1.mp4",
+"https://cdn2videy.cc/e/reCgQSvI1.mp4",
+"https://videy.team/e/dcNX5HvY1.mp4",
+"https://videy.team/e/7ULt71Dv1.mp4",
+"https://videy.team/e/fhApcOCp1.mp4",
+"https://videy.team/e/yvIa61Cm1.mp4",
+"https://videy.team/e/pkeXpFDc1.mp4",
+"https://cdn2videy.cc/e/yyILrBh61.mp4"
+];
+
+let loaded = 0;
+const perLoad = 6;
+
+function createCard(link, index) {
+  const card = document.createElement("a");
+  card.href = "player.html?video=" + encodeURIComponent(link);
+  card.className = "card";
+
+  const video = document.createElement("video");
+  video.src = link;
+  video.muted = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+
+  // ambil frame pertama jadi thumbnail
+  video.addEventListener("loadeddata", () => {
+    video.currentTime = 1;
+  });
+
+  const canvas = document.createElement("canvas");
+
+  video.addEventListener("seeked", () => {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL();
+
+    card.innerHTML = "";
+    card.appendChild(img);
+
+    const duration = document.createElement("div");
+    duration.className = "duration";
+    duration.textContent = "HD";
+
+    const title = document.createElement("p");
+    title.textContent = "Video " + (index + 1);
+
+    card.appendChild(duration);
+    card.appendChild(title);
+  });
+
+  return card;
+}
+
+function loadMore() {
+  const container = document.getElementById("container");
+
+  for (let i = loaded; i < loaded + perLoad && i < videos.length; i++) {
+    container.appendChild(createCard(videos[i], i));
+  }
+
+  loaded += perLoad;
+}
+
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+    loadMore();
+  }
+});
+
+loadMore();
+</script>
+
 </body>
 </html>
