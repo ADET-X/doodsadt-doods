@@ -1,40 +1,94 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Streaming</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Shopee Link Converter</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+    input, select {
+      padding: 10px;
+      width: 320px;
+      border-radius: 8px;
+      border: none;
+      margin: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #00ff99;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .copy-btn {
+      background: #00ccff;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>MY STREAM</h1>
-</header>
+<h2>🔥 Shopee Link Converter</h2>
 
-<div class="container" id="container"></div>
+<input type="text" id="link" placeholder="Paste link Shopee">
+<br>
+
+<select id="domain">
+  <option value="https://cdn2.videy.team">cdn2.videy.team</option>
+  <option value="https://cdn2videy.cc">cdn2videy.cc</option>
+</select>
+
+<br><br>
+<button onclick="convert()">Convert</button>
+
+<div id="result"></div>
 
 <script>
-const videos = [
-"https://cdn2videy.cc/e/wwWzwtE61.mp4",
-"https://videy.team/e/npjo5pFg1.mp4",
-"https://videy.team/e/Nsn7Draa1.mp4",
-"https://videy.team/e/2WwLbcRc1.mp4",
-"https://videy.team/e/ZuIszC4H1.mp4",
-"https://videy.team/e/H6b66wKN1.mp4",
-"https://videy.team/e/BSIXZXPU1.mp4",
-"https://cdn2videy.cc/e/gTL1KaGs1.mp4",
-"https://cdn2videy.cc/e/AFFLUZiC1.mp4",
-"https://videy.team/e/MaECv5nc1.mp4",
-"https://videy.team/e/06NRaTZS1.mp4",
-"https://videy.team/e/3aigsCib1.mp4",
-"https://videy.team/e/4PWS9KoL1.mp4",
-"https://videy.team/e/0wBk3glu1.mp4",
-"https://cdn2videy.cc/e/2m3U20Gu1.mp4",
-"https://cdn2videy.cc/e/reCgQSvI1.mp4",
-"https://videy.team/e/dcNX5HvY1.mp4",
-"https://videy.team/e/7ULt71Dv1.mp4",
-"https://videy.team/e/fhApcOCp1.mp4",
+// redirect handler (biar .mp4 jalan)
+const path = window.location.pathname;
+const match = path.match(/\/([a-zA-Z0-9]+)\.mp4/);
+
+if (match) {
+  const code = match[1];
+  window.location.href = "https://s.shopee.co.id/" + code;
+}
+
+// convert
+function convert() {
+  const link = document.getElementById("link").value;
+  const domain = document.getElementById("domain").value;
+
+  if (!link.includes("s.shopee.co.id")) {
+    alert("Harus link Shopee!");
+    return;
+  }
+
+  const code = link.split("/").pop();
+  const result = domain + "/" + code + ".mp4";
+
+  document.getElementById("result").innerHTML = `
+    <p id="short">${result}</p>
+    <button class="copy-btn" onclick="copyLink()">📋 Copy</button>
+  `;
+}
+
+// copy function
+function copyLink() {
+  const text = document.getElementById("short").innerText;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("✅ Link berhasil di-copy!");
+  });
+}
+</script>
+
+</body>
+</html>"https://videy.team/e/fhApcOCp1.mp4",
 "https://videy.team/e/yvIa61Cm1.mp4",
 "https://videy.team/e/pkeXpFDc1.mp4",
 "https://cdn2videy.cc/e/yyILrBh61.mp4"
